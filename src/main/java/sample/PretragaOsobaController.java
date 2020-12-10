@@ -21,6 +21,8 @@ public class PretragaOsobaController {
     @FXML
     private TableColumn<Osoba, String> prezimeStupac;
     @FXML
+    private TableColumn<Osoba, String> korisnickoImeStupac;
+    @FXML
     private TableColumn<Osoba, Integer> starostStupac;
     @FXML
     private TableColumn<Osoba, Zupanija> zupanijaStupac;
@@ -34,21 +36,41 @@ public class PretragaOsobaController {
     public void pretraga() throws IOException {
         String uneseniNazivOsobe = unosNazivaOsobe.getText().toLowerCase();
 
+        // 1. Zadatak - pretraga
+
         Optional<List<Osoba>> filtriraneOsobePoImenu = Optional.ofNullable(Main.osobe.stream()
                 .filter(z -> (z.getIme().toLowerCase().contains(uneseniNazivOsobe)))
                 .collect(Collectors.toList()));
         Optional<List<Osoba>> filtriraneOsobePoPrezimenu = Optional.ofNullable(Main.osobe.stream()
                 .filter(z -> (z.getPrezime().toLowerCase().contains(uneseniNazivOsobe)))
                 .collect(Collectors.toList()));
+
+        Optional<List<Osoba>> filtriraneOsobePoKorisnickomImenu = Optional.ofNullable(Main.osobe.stream()
+                .filter(z -> (z.getKorisnickoIme().toLowerCase().contains(uneseniNazivOsobe)))
+                .collect(Collectors.toList()));
+
 //        System.out.println(filtriraneZupanije.get(0).getNaziv());
 
-        if(filtriraneOsobePoImenu.isPresent() || filtriraneOsobePoPrezimenu.isPresent()) {
+
+        if(filtriraneOsobePoImenu.isPresent() || filtriraneOsobePoPrezimenu.isPresent() || filtriraneOsobePoKorisnickomImenu.isPresent()) {
             List<Osoba> filtriraneOsobe = new ArrayList<>();
-            if(filtriraneOsobePoImenu.isPresent() && filtriraneOsobePoPrezimenu.isPresent()) {
+            if(filtriraneOsobePoImenu.isPresent() && filtriraneOsobePoPrezimenu.isPresent() && filtriraneOsobePoKorisnickomImenu.isPresent()) {
                 filtriraneOsobe.addAll(filtriraneOsobePoImenu.get());
                 filtriraneOsobe.addAll(filtriraneOsobePoPrezimenu.get());
-            } else if(filtriraneOsobePoImenu.isPresent() && filtriraneOsobePoPrezimenu.isEmpty()) {
+                filtriraneOsobe.addAll(filtriraneOsobePoKorisnickomImenu.get());
+            } else if(filtriraneOsobePoImenu.isPresent() && filtriraneOsobePoPrezimenu.isEmpty() && filtriraneOsobePoKorisnickomImenu.isPresent()) {
                 filtriraneOsobe.addAll(filtriraneOsobePoImenu.get());
+                filtriraneOsobe.addAll(filtriraneOsobePoKorisnickomImenu.get());
+            } else if(filtriraneOsobePoImenu.isPresent() && filtriraneOsobePoPrezimenu.isPresent() && filtriraneOsobePoKorisnickomImenu.isEmpty()) {
+                filtriraneOsobe.addAll(filtriraneOsobePoImenu.get());
+                filtriraneOsobe.addAll(filtriraneOsobePoPrezimenu.get());
+            } else if (filtriraneOsobePoImenu.isPresent() && filtriraneOsobePoPrezimenu.isEmpty() && filtriraneOsobePoKorisnickomImenu.isEmpty()) {
+                filtriraneOsobe.addAll(filtriraneOsobePoImenu.get());
+            } else if(filtriraneOsobePoImenu.isEmpty() && filtriraneOsobePoPrezimenu.isPresent() && filtriraneOsobePoKorisnickomImenu.isPresent()) {
+                filtriraneOsobe.addAll(filtriraneOsobePoPrezimenu.get());
+                filtriraneOsobe.addAll(filtriraneOsobePoKorisnickomImenu.get());
+            } else if(filtriraneOsobePoImenu.isEmpty() && filtriraneOsobePoPrezimenu.isEmpty() && filtriraneOsobePoKorisnickomImenu.isPresent()) {
+                filtriraneOsobe.addAll(filtriraneOsobePoKorisnickomImenu.get());
             } else {
                 filtriraneOsobe.addAll(filtriraneOsobePoPrezimenu.get());
             }
@@ -57,6 +79,7 @@ public class PretragaOsobaController {
             filtriraneOsobe.addAll(setFiltriranihOsoba);
             imeStupac.setCellValueFactory(new PropertyValueFactory<Osoba, String>("ime"));
             prezimeStupac.setCellValueFactory(new PropertyValueFactory<Osoba, String>("prezime"));
+            korisnickoImeStupac.setCellValueFactory(new PropertyValueFactory<Osoba, String>("korisnickoIme"));
             starostStupac.setCellValueFactory(new PropertyValueFactory<Osoba, Integer>("starost"));
             zupanijaStupac.setCellValueFactory(new PropertyValueFactory<Osoba, Zupanija>("zupanija"));
             bolestStupac.setCellValueFactory(new PropertyValueFactory<Osoba, Bolest>("zarazenBolescu"));

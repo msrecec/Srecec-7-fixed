@@ -24,7 +24,7 @@ public class Osoba implements Serializable {
      */
     public static class Builder {
         private Long id;
-        private String ime, prezime;
+        private String ime, prezime, korisnickoIme;
         private Integer starost;
         private Zupanija zupanija;
         private Bolest zarazenBolescu;
@@ -61,6 +61,18 @@ public class Osoba implements Serializable {
          */
         public Builder prezime(String prezime) {
             this.prezime = prezime;
+            return this;
+        }
+
+        /**
+         * Služi za instanciranje objekta klase <code>class Builder</code>
+         * Vraća samu instancu
+         *
+         * @param korisnickoIme prezime osobe
+         * @return
+         */
+        public Builder korisnickoIme(String korisnickoIme) {
+            this.korisnickoIme = korisnickoIme;
             return this;
         }
 
@@ -128,6 +140,7 @@ public class Osoba implements Serializable {
             osoba.id = this.id;
             osoba.ime = this.ime;
             osoba.prezime = this.prezime;
+            osoba.korisnickoIme = this.korisnickoIme;
             osoba.starost = this.starost;
             osoba.zupanija = this.zupanija;
             osoba.zarazenBolescu = this.zarazenBolescu;
@@ -151,7 +164,7 @@ public class Osoba implements Serializable {
     // Class Fields
 
     private Long id;
-    private String ime, prezime;
+    private String ime, prezime, korisnickoIme;
     private Integer starost;
     private Zupanija zupanija;
     private Bolest zarazenBolescu;
@@ -190,6 +203,7 @@ public class Osoba implements Serializable {
 
 
         return "Ime i prezime: " + ime + " " + prezime + "\n" +
+                "Korisnicko ime: " + korisnickoIme + "\n" +
                 "Starost: " + starost + "\n" +
                 "Županija prebivališta: " + zupanija.getNaziv() + "\n" +
                 "Zaražen bolešću: " + zarazenBolescu.getNaziv() + "\n" +
@@ -213,6 +227,7 @@ public class Osoba implements Serializable {
         return Objects.equals(getId(), osoba.getId()) &&
                 Objects.equals(getIme(), osoba.getIme()) &&
                 Objects.equals(getPrezime(), osoba.getPrezime()) &&
+                Objects.equals(getKorisnickoIme(), osoba.getKorisnickoIme()) &&
                 Objects.equals(getStarost(), osoba.getStarost()) &&
                 Objects.equals(getZupanija(), osoba.getZupanija()) &&
                 Objects.equals(getZarazenBolescu(), osoba.getZarazenBolescu()) &&
@@ -227,7 +242,7 @@ public class Osoba implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getIme(), getPrezime(), getStarost(), getZupanija(), getZarazenBolescu(), getKontaktiraneOsobe());
+        return Objects.hash(getId(), getIme(), getPrezime(), getKorisnickoIme(), getStarost(), getZupanija(), getZarazenBolescu(), getKontaktiraneOsobe());
     }
 
 
@@ -293,11 +308,22 @@ public class Osoba implements Serializable {
         this.prezime = prezime;
     }
 
+
+    public String getKorisnickoIme() {
+        return korisnickoIme;
+    }
+
+    public void setKorisnickoIme(String korisnickoIme) {
+        this.korisnickoIme = korisnickoIme;
+    }
+
     /**
      * Vraća starost osobe
      *
      * @return starost
      */
+
+
 
     public Integer getStarost() {
         return starost;

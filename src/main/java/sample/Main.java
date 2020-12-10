@@ -725,7 +725,7 @@ public class Main extends Application {
         File unosOsoba = new File("dat/osobe.txt");
         String procitanaLinija;
         Long odabranaZupanija, odabranaUnesenaBolest, idOsobe;
-        String ime, prezime;
+        String ime, prezime, korisnickoIme;
         Integer starost = 0;
         Zupanija zupanija = null;
         Bolest bolest = null;
@@ -751,7 +751,11 @@ public class Main extends Application {
 
                 prezime = reader.readLine();
 
-                logger.info("Unesen je ime osobe: " + prezime);
+                logger.info("Unesen je prezime osobe: " + prezime);
+
+                korisnickoIme = reader.readLine();
+
+                logger.info("Unesen je korisnickoIme osobe: " + korisnickoIme);
 
                 starost = Integer.parseInt(reader.readLine());
 
@@ -795,16 +799,16 @@ public class Main extends Application {
 
                         });
 
-                        osobe.add(new Osoba.Builder(idOsobe).ime(ime).prezime(prezime).starost(starost).zupanija(zupanija)
+                        osobe.add(new Osoba.Builder(idOsobe).ime(ime).prezime(prezime).korisnickoIme(korisnickoIme).starost(starost).zupanija(zupanija)
                                 .zarazenBolescu(bolest).kontaktiraneOsobe(finalKontaktiraneOsobe).build());
 
                     } else {
-                        osobe.add(new Osoba.Builder(idOsobe).ime(ime).prezime(prezime).starost(starost).zupanija(zupanija)
+                        osobe.add(new Osoba.Builder(idOsobe).ime(ime).prezime(prezime).korisnickoIme(korisnickoIme).starost(starost).zupanija(zupanija)
                                 .zarazenBolescu(bolest).build());
                     }
 
                 } else {
-                    osobe.add(new Osoba.Builder(idOsobe).ime(ime).prezime(prezime).starost(starost).zupanija(zupanija)
+                    osobe.add(new Osoba.Builder(idOsobe).ime(ime).prezime(prezime).korisnickoIme(korisnickoIme).starost(starost).zupanija(zupanija)
                             .zarazenBolescu(bolest).build());
                 }
 

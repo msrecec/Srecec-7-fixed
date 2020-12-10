@@ -38,12 +38,13 @@
 <children>
     <TableView fx:id="tablicaOsoba" prefHeight="271.0" prefWidth="550.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="7" GridPane.rowSpan="2147483647">
         <columns>
-            <TableColumn fx:id="imeStupac" prefWidth="97.0" text="Ime" />
-            <TableColumn fx:id="prezimeStupac" maxWidth="1.7976931348623157E308" prefWidth="113.0" text="Prezime" />
-            <TableColumn fx:id="starostStupac" prefWidth="84.0" text="Starost" />
-            <TableColumn fx:id="zupanijaStupac" prefWidth="92.0" text="Županija" />
-            <TableColumn fx:id="bolestStupac" prefWidth="72.0" text="Bolest" />
-            <TableColumn fx:id="kontaktiraneOsobeStupac" prefWidth="91.0" text="Kontaktirane Osobe" />
+            <TableColumn fx:id="imeStupac" prefWidth="65.0" text="Ime" />
+            <TableColumn fx:id="prezimeStupac" maxWidth="1.7976931348623157E308" prefWidth="74.0" text="Prezime" />
+            <TableColumn fx:id="korisnickoImeStupac" maxWidth="1.7976931348623157E308" prefWidth="88.0" text="Korisničko ime" />
+            <TableColumn fx:id="starostStupac" prefWidth="78.0" text="Starost" />
+            <TableColumn fx:id="zupanijaStupac" prefWidth="94.0" text="Županija" />
+            <TableColumn fx:id="bolestStupac" prefWidth="63.0" text="Bolest" />
+            <TableColumn fx:id="kontaktiraneOsobeStupac" prefWidth="87.0" text="Kontaktirane Osobe" />
         </columns>
     </TableView>
     <Label text="Pretraživanje Osoba" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.halignment="LEFT" GridPane.rowIndex="1">
