@@ -79,7 +79,7 @@
           </Menu>
             <Menu mnemonicParsing="false" text="Virusi">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Pretraga" />
+                  <MenuItem mnemonicParsing="false" onAction="#prikaziEkranZaPretraguVirusa" text="Pretraga" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Osobe">
