@@ -91,4 +91,9 @@ public class Zupanija extends ImenovaniEntitet implements Serializable {
     public void setBrojZarazenih(Integer brojZarazenih) {
         this.brojZarazenih = brojZarazenih;
     }
+
+    @Override
+    public String toString() {
+        return getNaziv();
+    }
 }
