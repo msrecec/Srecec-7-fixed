@@ -16,39 +16,39 @@ import java.util.ResourceBundle;
 
 public class PocetniEkranController implements Initializable {
 
-    @FXML
-    private TextField usernameTextField;
-    @FXML
-    private TextField passwordField;
-
-    public void login() throws IOException {
-        String username = usernameTextField.getText();
-        String password = passwordField.getText();
-        System.out.println(Main.osobe.get(1).getIme());
-
-
-
-        if("pero".equals(username) && "pp".equals(password)) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Prijava u aplikaciju");
-            alert.setHeaderText("Uspješna prijava");
-            alert.setContentText("Čestitamo, uspješno ste se prijavili u aplikaciju!");
-            alert.showAndWait();
-            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("pretragaZupanija.fxml"));
-            Scene pretragaZupanijaScene = new Scene(root, 550, 380);
-            Main.getMainStage().setScene(pretragaZupanijaScene);
-//            Stage stage = new Stage();
-//            stage.setTitle("Ekran aplikacije");
-//            stage.setScene(new Scene(root, 600, 400));
-//            stage.show();
-        } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Prijava u aplikaciju");
-            alert.setHeaderText("Nespješna prijava");
-            alert.setContentText("Unijeli ste neispravno korisničko ime ili lozinku!");
-            alert.showAndWait();
-        }
-    }
+//    @FXML
+//    private TextField usernameTextField;
+//    @FXML
+//    private TextField passwordField;
+//
+//    public void login() throws IOException {
+//        String username = usernameTextField.getText();
+//        String password = passwordField.getText();
+//        System.out.println(Main.osobe.get(1).getIme());
+//
+//
+//
+//        if("pero".equals(username) && "pp".equals(password)) {
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Prijava u aplikaciju");
+//            alert.setHeaderText("Uspješna prijava");
+//            alert.setContentText("Čestitamo, uspješno ste se prijavili u aplikaciju!");
+//            alert.showAndWait();
+//            Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("pretragaZupanija.fxml"));
+//            Scene pretragaZupanijaScene = new Scene(root, 550, 380);
+//            Main.getMainStage().setScene(pretragaZupanijaScene);
+////            Stage stage = new Stage();
+////            stage.setTitle("Ekran aplikacije");
+////            stage.setScene(new Scene(root, 600, 400));
+////            stage.show();
+//        } else {
+//            Alert alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Prijava u aplikaciju");
+//            alert.setHeaderText("Nespješna prijava");
+//            alert.setContentText("Unijeli ste neispravno korisničko ime ili lozinku!");
+//            alert.showAndWait();
+//        }
+//    }
 
     public void prikaziEkranZaPretraguZupanija () throws IOException {
         Parent pretragaZupanijaFrame = FXMLLoader.load(getClass().getClassLoader().getResource("pretragaZupanija.fxml"));
