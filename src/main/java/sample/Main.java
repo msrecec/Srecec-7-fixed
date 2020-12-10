@@ -30,11 +30,18 @@ public class Main extends Application {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
+    static SortedSet<Zupanija> zupanije = new TreeSet<>(new CovidSorter());
+    static Set<Simptom> simptomi = new HashSet<>();
+    static Set<Bolest> bolesti = new HashSet<>();
+    static List<Osoba> osobe = new ArrayList<>();
+    static Map<Bolest, List<Osoba>> osobeZarazeneVirusima = new HashMap<>();
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("pocetniEkran.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 250, 200));
+        primaryStage.setScene(new Scene(root, 550, 380));
+        mainStage = primaryStage;
         primaryStage.show();
     }
 
@@ -45,11 +52,11 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        SortedSet<Zupanija> zupanije = new TreeSet<>(new CovidSorter());
-        Set<Simptom> simptomi = new HashSet<>();
-        Set<Bolest> bolesti = new HashSet<>();
-        List<Osoba> osobe = new ArrayList<>();
-        Map<Bolest, List<Osoba>> osobeZarazeneVirusima = new HashMap<>();
+//        SortedSet<Zupanija> zupanije = new TreeSet<>(new CovidSorter());
+//        Set<Simptom> simptomi = new HashSet<>();
+//        Set<Bolest> bolesti = new HashSet<>();
+//        List<Osoba> osobe = new ArrayList<>();
+//        Map<Bolest, List<Osoba>> osobeZarazeneVirusima = new HashMap<>();
 
         // Unos Zupanija
 
@@ -205,6 +212,7 @@ public class Main extends Application {
                 + " milisekundi, a bez lambdi traje "
                 + Duration.between(start2, end2)
                 + " milisekundi");
+        /*
 
         System.out.print("Unesite string za pretragu po prezimenu: ");
 
@@ -231,6 +239,8 @@ public class Main extends Application {
                 el -> el.stream().map(ele -> ele.getIme() + " " + ele.getPrezime()).forEach(System.out::println),
                 () -> System.out.println("Lista je prazna")
         );
+
+         */
 
 //        // Ovo bi bio drugi nacin rjesavanja ovakvog problema, no ne koristi lambde u potpunosti
 //
