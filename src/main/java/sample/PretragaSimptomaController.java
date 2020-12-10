@@ -10,6 +10,7 @@ import main.java.sample.covidportal.model.Zupanija;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class PretragaSimptomaController {
@@ -25,13 +26,15 @@ public class PretragaSimptomaController {
     public void pretraga() throws IOException {
         String uneseniNazivSimptoma = unosNazivaSimptoma.getText().toLowerCase();
 
-        List<Simptom> filtriraniSimptom = Main.simptomi.stream().filter(z -> z.getNaziv().toLowerCase().contains(uneseniNazivSimptoma)).collect(Collectors.toList());
-        System.out.println(filtriraniSimptom.get(0).getNaziv());
+        Optional<List<Simptom>> filtriraniSimptom = Optional.ofNullable(Main.simptomi.stream().filter(z -> z.getNaziv().toLowerCase().contains(uneseniNazivSimptoma)).collect(Collectors.toList()));
+//        System.out.println(filtriraniSimptom.get(0).getNaziv());
 
-        nazivStupac.setCellValueFactory(new PropertyValueFactory<Simptom, String>("naziv"));
-        vrijednostStupac.setCellValueFactory(new PropertyValueFactory<Simptom, String>("vrijednost"));
+        if(filtriraniSimptom.isPresent()) {
+            nazivStupac.setCellValueFactory(new PropertyValueFactory<Simptom, String>("naziv"));
+            vrijednostStupac.setCellValueFactory(new PropertyValueFactory<Simptom, String>("vrijednost"));
 
-        tablicaSimptoma.getItems().setAll(filtriraniSimptom);
+            tablicaSimptoma.getItems().setAll(filtriraniSimptom.get());
+        }
 
 //        tablicaZupanija.setItems(FXCollections.observableArrayList(filtriraneZupanije));
     }

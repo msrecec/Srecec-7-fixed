@@ -12,6 +12,7 @@ import main.java.sample.covidportal.sort.CovidSorter;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -31,14 +32,17 @@ public class PretragaZupanijaController {
     public void pretraga() throws IOException {
         String uneseniNazivZupanije = unosNazivaZupanije.getText().toLowerCase();
 
-        List<Zupanija> filtriraneZupanije = Main.zupanije.stream().filter(z -> z.getNaziv().toLowerCase().contains(uneseniNazivZupanije)).collect(Collectors.toList());
-        System.out.println(filtriraneZupanije.get(0).getNaziv());
+        Optional<List<Zupanija>> filtriraneZupanije = Optional.ofNullable(Main.zupanije.stream().filter(z -> z.getNaziv().toLowerCase().contains(uneseniNazivZupanije)).collect(Collectors.toList()));
+//        System.out.println(filtriraneZupanije.get(0).getNaziv());
 
-        nazivStupac.setCellValueFactory(new PropertyValueFactory<Zupanija, String>("naziv"));
-        stanovniciStupac.setCellValueFactory(new PropertyValueFactory<Zupanija, Integer>("brojStanovnika"));
-        zarazeniStupac.setCellValueFactory(new PropertyValueFactory<Zupanija, Integer>("brojZarazenih"));
+        if(filtriraneZupanije.isPresent()) {
+            nazivStupac.setCellValueFactory(new PropertyValueFactory<Zupanija, String>("naziv"));
+            stanovniciStupac.setCellValueFactory(new PropertyValueFactory<Zupanija, Integer>("brojStanovnika"));
+            zarazeniStupac.setCellValueFactory(new PropertyValueFactory<Zupanija, Integer>("brojZarazenih"));
 
-        tablicaZupanija.getItems().setAll(filtriraneZupanije);
+            tablicaZupanija.getItems().setAll(filtriraneZupanije.get());
+        }
+
 
 //        tablicaZupanija.setItems(FXCollections.observableArrayList(filtriraneZupanije));
     }
