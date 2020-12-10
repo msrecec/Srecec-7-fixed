@@ -74,4 +74,9 @@ public class Simptom extends ImenovaniEntitet implements Serializable {
     public void setVrijednost(VrijednostSimptoma vrijednost) {
         this.vrijednost = vrijednost;
     }
+
+    @Override
+    public String toString() {
+        return this.getNaziv();
+    }
 }

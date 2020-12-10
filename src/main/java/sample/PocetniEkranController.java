@@ -70,6 +70,11 @@ public class PocetniEkranController implements Initializable {
         Scene pretragaVirusaScene = new Scene(pretragaVirusaFrame, 550, 380);
         Main.getMainStage().setScene(pretragaVirusaScene);
     }
+    public void prikaziEkranZaPretraguOsoba () throws IOException {
+        Parent pretragaOsobaFrame = FXMLLoader.load(getClass().getClassLoader().getResource("pretragaOsoba.fxml"));
+        Scene pretragaOsobaScene = new Scene(pretragaOsobaFrame, 550, 380);
+        Main.getMainStage().setScene(pretragaOsobaScene);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
