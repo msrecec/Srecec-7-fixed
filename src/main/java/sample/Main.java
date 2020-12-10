@@ -39,7 +39,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("pocetniEkran.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Početni ekran");
         primaryStage.setScene(new Scene(root, 550, 380));
         mainStage = primaryStage;
         primaryStage.show();
