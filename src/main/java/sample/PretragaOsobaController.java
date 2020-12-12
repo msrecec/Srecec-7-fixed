@@ -1,10 +1,15 @@
 package main.java.sample;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import main.java.sample.covidportal.model.Bolest;
 import main.java.sample.covidportal.model.Osoba;
 import main.java.sample.covidportal.model.Zupanija;
@@ -36,7 +41,7 @@ public class PretragaOsobaController {
     public void pretraga() throws IOException {
         String uneseniNazivOsobe = unosNazivaOsobe.getText().toLowerCase();
 
-        // 1. Zadatak - pretraga
+        // 1. zadatak - pretraga
 
         Optional<List<Osoba>> filtriraneOsobePoImenu = Optional.ofNullable(Main.osobe.stream()
                 .filter(z -> (z.getIme().toLowerCase().contains(uneseniNazivOsobe)))
@@ -86,6 +91,50 @@ public class PretragaOsobaController {
             kontaktiraneOsobeStupac.setCellValueFactory(new PropertyValueFactory<Osoba, List<Osoba>>("kontaktiraneOsobe"));
 
             tablicaOsoba.getItems().setAll(filtriraneOsobe);
+
+            // 2. zadatak - double click event listener
+
+            tablicaOsoba.setRowFactory( t -> {
+                TableRow<Osoba> red = new TableRow<>();
+                // dodajem callback funkciju na event listener - ala JavaScript ista logika samo brojimo klikove sa getClickCount() metodom umjesto nekakvom statičkom varijablom
+                red.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!red.isEmpty())) {
+
+                        // znam da je ruzan workaround preko globalne varijable , no ne stignem napraviti konstruktor niti metodu za prikazivanje preko kontrolera
+//                        Main.odabranaOsoba = red.getItem();
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("pretragaOsobe.fxml"));
+                        Scene scene = null;
+                        try {
+                            scene = new Scene(loader.load(), 550, 380);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+//                        Stage stg = new Stage(); // Ovo je koristimo ako zelimo otvoriti u novom prozoru
+
+                        Stage stg = Main.getMainStage(); // Ovo koristimo ako zelimo otvoriti u istom prozoru
+
+                        stg.setScene(scene);
+                        stg.show();
+
+                        PretragaOsobeController controller = loader.getController();
+                        controller.prikaziOsobu(red.getItem());
+
+//                        Parent pretragaOsobaFrame = null;
+//                        try {
+//                            pretragaOsobaFrame = FXMLLoader.load(getClass().getClassLoader().getResource("pretragaOsobe.fxml"));
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+
+
+
+//                        Scene pretragaOsobaScene = new Scene(pretragaOsobaFrame, 550, 380);
+//                        Main.getMainStage().setScene(pretragaOsobaScene);
+                    }
+                });
+                return red ;
+            });
         }
 
 
